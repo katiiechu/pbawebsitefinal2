@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-
-
+    // Page navigation
     function navigateTo(pageId) {
         const pages = document.querySelectorAll('.page');
         pages.forEach(p => p.classList.remove('active'));
@@ -13,9 +12,9 @@ window.addEventListener('DOMContentLoaded', () => {
         const activeBtn = document.getElementById(`btn-${pageId}`);
         if (activeBtn) activeBtn.classList.add('active');
     }
-
     window.navigateTo = navigateTo; 
 
+    // Particle canvas
     const canvas = document.getElementById('particle-canvas');
     if (!canvas) return; 
     const ctx = canvas.getContext('2d');
@@ -27,7 +26,8 @@ window.addEventListener('DOMContentLoaded', () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    let particlesArray = [];
+    const particlesArray = [];
+    const PARTICLE_COUNT = 120;
 
     class Particle {
         constructor() {
@@ -36,14 +36,11 @@ window.addEventListener('DOMContentLoaded', () => {
             this.size = Math.random() * 3 + 1;
             this.speedX = (Math.random() - 0.5) * 0.5;
             this.speedY = (Math.random() - 0.5) * 0.5;
-
             this.color = 'rgba(120, 180, 255, 0.6)';
-
         }
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
-
             if (this.x > canvas.width) this.x = 0;
             if (this.x < 0) this.x = canvas.width;
             if (this.y > canvas.height) this.y = 0;
@@ -58,8 +55,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function initParticles() {
-        particlesArray = [];
-        for (let i = 0; i < 120; i++) {
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
             particlesArray.push(new Particle());
         }
     }
@@ -75,5 +71,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
     initParticles();
     animateParticles();
-
 });
