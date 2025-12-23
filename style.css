@@ -13,8 +13,20 @@
     box-sizing: border-box;
 }
 
+/* BODY */
+body {
+    background: var(--bg);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    overflow-x: hidden; /* allow vertical scroll */
+    position: relative;
+    z-index: 0;
+}
+
+/* PAGE SECTIONS */
 .page {
-    position: relative; /* relative instead of absolute */
+    position: relative;  /* relative instead of absolute */
     width: 100%;
     min-height: 100vh;
     padding: 150px 10% 50px;
@@ -31,24 +43,26 @@
     pointer-events: auto;
 }
 
-/* Fixed: .glow-orb class renamed to match your HTML (.glow-blob) */
+/* GLOW BLOBS */
 .glow-blob {
     position: fixed;
     border-radius: 50%;
     filter: blur(100px);
     opacity: 0.3;
-    z-index: -1;
+    z-index: -1; /* behind content, above canvas */
     animation: pulse 10s infinite alternate;
 }
 
 .orb-1 { width: 500px; height: 500px; background: #1b4d3e; top: -10%; left: -10%; }
 .orb-2 { width: 400px; height: 400px; background: #0c2b22; bottom: -5%; right: -5%; }
+.orb-3 { width: 450px; height: 450px; background: #204d33; top: 30%; right: -5%; }
 
 @keyframes pulse {
     from { transform: scale(1); }
     to { transform: scale(1.2); }
 }
 
+/* NAVIGATION */
 nav {
     display: flex;
     justify-content: space-between;
@@ -91,24 +105,7 @@ nav {
     padding-bottom: 4px;
 }
 
-/* Fixed: use visibility + pointer-events instead of display for smooth page transitions */
-.page {
-    position: absolute;
-    width: 100%;
-    min-height: 100vh;
-    padding: 150px 10% 50px;
-    opacity: 0;
-    transform: translateY(20px) scale(0.98);
-    pointer-events: none;
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.page.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-}
-
+/* BADGE */
 .badge {
     font-size: 10px;
     color: var(--primary);
@@ -119,6 +116,7 @@ nav {
     margin-bottom: 20px;
 }
 
+/* HEADINGS */
 h1 {
     font-family: 'Playfair Display', serif;
     font-size: 5rem;
@@ -138,6 +136,7 @@ h1 {
     max-width: 500px;
 }
 
+/* GLASS CONTAINER */
 .glass-container {
     background: var(--glass);
     border: 1px solid var(--border);
@@ -147,6 +146,7 @@ h1 {
     border-radius: 4px;
 }
 
+/* GRID FOR INTERVIEWS */
 .trilogy-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -166,6 +166,7 @@ h1 {
     background: rgba(82, 255, 155, 0.05);
 }
 
+/* AUDIO PLAYER */
 audio {
     width: 100%;
     margin: 20px 0;
@@ -173,6 +174,7 @@ audio {
     opacity: 0.6;
 }
 
+/* PRIMARY BUTTONS */
 .primary-btn {
     background: var(--primary);
     border: none;
@@ -188,17 +190,8 @@ audio {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(82, 255, 155, 0.2);
 }
-body {
-    background: var(--bg);
-    color: white;
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    overflow-x: hidden; /* allow vertical scroll if needed */
-    position: fixed;
-    z-index: -1;
-}
 
-/* Make sure particle canvas stays in the background */
+/* PARTICLE CANVAS */
 #canvas-container {
     position: fixed;
     top: 0;
