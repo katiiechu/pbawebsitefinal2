@@ -1,8 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
 
-    // ==========================
-    // PAGE NAVIGATION
-    // ==========================
+
     function navigateTo(pageId) {
         const pages = document.querySelectorAll('.page');
         pages.forEach(p => p.classList.remove('active'));
@@ -16,13 +14,10 @@ window.addEventListener('DOMContentLoaded', () => {
         if (activeBtn) activeBtn.classList.add('active');
     }
 
-    window.navigateTo = navigateTo; // expose globally
+    window.navigateTo = navigateTo; 
 
-    // ==========================
-    // PARTICLE BACKGROUND
-    // ==========================
     const canvas = document.getElementById('particle-canvas');
-    if (!canvas) return; // safety check
+    if (!canvas) return; 
     const ctx = canvas.getContext('2d');
 
     function resizeCanvas() {
