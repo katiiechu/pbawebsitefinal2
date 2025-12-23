@@ -1,22 +1,13 @@
-/* ==========================
-   FONT IMPORTS
-=========================== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@400;700&display=swap');
 
-/* ==========================
-   ROOT VARIABLES
-=========================== */
 :root {
-    --bg: #050806;
+    --bg-start: #013220;
+    --bg-end: #050806;
     --primary: #52ff9b;
-    --glass: rgba(255, 255, 255, 0.05);
+    --glass: rgba(255, 255, 255, 0.03);
     --border: rgba(255, 255, 255, 0.1);
-    --blur: 40px;
 }
 
-/* ==========================
-   GLOBAL RESET
-=========================== */
 * {
     margin: 0;
     padding: 0;
@@ -24,59 +15,46 @@
 }
 
 body {
-    background: var(--bg);
-    color: white;
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-    overflow-y: auto;
+    color: white;
+    overflow: hidden;
+    background: linear-gradient(120deg, var(--bg-start), var(--bg-end));
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
 }
 
-/* ==========================
-   BACKGROUND PARTICLES
-=========================== */
-#particle-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -3;
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* ==========================
-   FLOATING SHAPES
-=========================== */
-.floating-shape {
+.glow-blob {
     position: fixed;
-    width: 50px;
-    height: 50px;
-    opacity: 0.2;
-    z-index: -2;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    opacity: 0.1;
     pointer-events: none;
-    animation: floatShape 20s linear infinite;
+    filter: blur(100px);
+    animation: floatBlob 25s ease-in-out infinite;
 }
 
-.floating-shape img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+.blob-1 { background: #52ff9b; top: 10%; left: 20%; animation-delay: 0s; }
+.blob-2 { background: #52ff9b; bottom: 15%; right: 25%; animation-delay: 5s; }
+.blob-3 { background: #52ff9b; top: 40%; right: 10%; animation-delay: 10s; }
+
+@keyframes floatBlob {
+    0% { transform: translate(0,0); }
+    50% { transform: translate(50px, -30px); }
+    100% { transform: translate(0,0); }
 }
 
-@keyframes floatShape {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(50px) rotate(180deg); }
-    100% { transform: translateY(0) rotate(360deg); }
-}
-
-/* ==========================
-   NAVIGATION
-=========================== */
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 60px;
+    padding: 40px 80px;
     position: fixed;
     width: 100%;
     z-index: 100;
@@ -85,7 +63,7 @@ nav {
 .logo {
     font-weight: 600;
     letter-spacing: 5px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .logo span {
@@ -94,7 +72,7 @@ nav {
 
 .nav-links {
     display: flex;
-    gap: 25px;
+    gap: 30px;
 }
 
 .nav-item {
@@ -114,11 +92,8 @@ nav {
     padding-bottom: 4px;
 }
 
-/* ==========================
-   PAGE TRANSITIONS
-=========================== */
 .page {
-    position: relative;
+    position: absolute;
     width: 100%;
     min-height: 100vh;
     padding: 150px 10% 50px;
@@ -134,23 +109,20 @@ nav {
     transform: translateY(0) scale(1);
 }
 
-/* ==========================
-   HERO STYLING
-=========================== */
 .badge {
     font-size: 10px;
     color: var(--primary);
     border: 1px solid var(--primary);
     padding: 5px 15px;
-    border-radius: 50px;
+    border-radius: 20px;
     width: fit-content;
     margin-bottom: 20px;
 }
 
 h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    line-height: 1.1;
+    font-size: 5rem;
+    line-height: 1;
     margin-bottom: 20px;
 }
 
@@ -161,38 +133,18 @@ h1 {
 }
 
 .hero-sub {
-    opacity: 0.6;
+    opacity: 0.5;
     font-size: 1.2rem;
     max-width: 500px;
-    margin-bottom: 40px;
 }
 
-.primary-btn {
-    background: var(--primary);
-    border: none;
-    padding: 18px 35px;
-    border-radius: 30px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.primary-btn:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.8);
-}
-
-/* ==========================
-   GLASS CONTAINERS
-=========================== */
 .glass-container {
     background: var(--glass);
-    border-radius: 30px;
     border: 1px solid var(--border);
-    backdrop-filter: blur(var(--blur));
-    -webkit-backdrop-filter: blur(var(--blur));
-    padding: 50px;
-    margin: 50px 0;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    padding: 60px;
+    border-radius: 12px;
     transition: transform 0.3s;
 }
 
@@ -200,21 +152,18 @@ h1 {
     transform: translateY(-5px) scale(1.02);
 }
 
-/* ==========================
-   GRID / CARDS
-=========================== */
 .trilogy-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 .episode-card {
     background: rgba(255, 255, 255, 0.02);
-    border-radius: 30px;
+    padding: 40px;
     border: 1px solid var(--border);
-    padding: 30px;
+    border-radius: 12px;
     transition: transform 0.3s, border-color 0.3s, background 0.3s;
 }
 
@@ -226,37 +175,27 @@ h1 {
 
 audio {
     width: 100%;
-    margin-top: 15px;
+    margin: 20px 0;
     filter: invert(1);
     opacity: 0.6;
 }
 
-/* Center all content inside each episode card */
-.episode-card {
-    text-align: center;
-}
-
-/* Transcript buttons under audio */
-.episode-card a.primary-btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 6px;
-    background-color: var(--primary);  /* updated to match main green */
-    color: #000;                       /* black text for contrast */
+.primary-btn {
+    background: var(--primary);
+    border: none;
+    padding: 18px 35px;
+    border-radius: 30px;
     font-weight: 600;
-    transition: background-color 0.3s;
+    margin-top: 40px;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
-.episode-card a.primary-btn:hover {
-    background-color: #44e58c;  /* slightly darker green on hover */
+.primary-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(82, 255, 155, 0.3);
 }
 
-
-/* ==========================
-   RESOURCES
-=========================== */
 .resource-list {
     display: flex;
     flex-direction: column;
@@ -269,8 +208,10 @@ audio {
     align-items: center;
     gap: 15px;
     padding: 15px 20px;
-    border-radius: 30px;
+    border-radius: 20px;
     background: rgba(255, 255, 255, 0.02);
+    text-decoration: none;
+    color: white;
     transition: transform 0.3s, background 0.3s;
 }
 
@@ -283,20 +224,3 @@ audio {
     font-weight: 600;
     color: var(--primary);
 }
-
-a.res-item,
-a.res-item:visited,
-a.res-item:hover,
-a.res-item:active {
-    color: inherit;
-    text-decoration: none;
-}
-
-.res-item {
-    display: flex;
-    gap: 1rem;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-
